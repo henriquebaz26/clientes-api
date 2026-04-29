@@ -12,7 +12,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String nome;
     private String email;
     private String telefone;
 
@@ -23,10 +23,10 @@ public class Cliente {
         this.id = id;
     }
     public String getName() {
-        return name;
+        return nome;
     }
     public void setName(String name) {
-        this.name = name;
+        this.nome = name;
     }
     public String getEmail() {
         return email;

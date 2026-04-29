@@ -18,7 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    private ClienteRepository repository;
+    private final ClienteRepository repository;
 
     public ClienteController(ClienteRepository repository) {
         this.repository = repository;
@@ -26,24 +26,24 @@ public class ClienteController {
 
     // Create
     @PostMapping
-    private Cliente criar(@RequestBody Cliente cliente) {
+    public Cliente criar(@RequestBody Cliente cliente) {
         return repository.save(cliente);
     }
 
     // Read
     @GetMapping
-    private List<Cliente> ler() {
+    public List<Cliente> ler() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
-    private Cliente lerPorId(@PathVariable Long id) {
+    public Cliente lerPorId(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
     }
 
     // Update
     @PutMapping("/{id}")
-    private Cliente atualizar(@RequestBody Cliente cliente, @PathVariable Long id) {
+    public Cliente atualizar(@RequestBody Cliente cliente, @PathVariable Long id) {
 
         Cliente cli = repository.findById(id).orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
 
@@ -56,7 +56,7 @@ public class ClienteController {
 
     // Delete
     @DeleteMapping("/{id}")
-    private ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
 
         if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!");
